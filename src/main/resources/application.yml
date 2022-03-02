@@ -1,0 +1,15 @@
+# oracle ??
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@125.131.88.69:8200:ORCL
+    username: DT_PLAYGROUND
+    password: dt1234
+
+# mybatis ??
+mybatis:
+  type-aliases-package: com.example.jwt.entity
+  mapper-locations: classpath:mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+

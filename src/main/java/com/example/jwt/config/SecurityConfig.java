@@ -1,8 +1,8 @@
 package com.example.jwt.config;
 
 import com.example.jwt.config.jwt.JwtAuthenticationFilter;
-import com.example.jwt.filter.MyFilter1;
-import com.example.jwt.filter.MyFilter3;
+import com.example.jwt.config.jwt.JwtAuthorizationFilter;
+import com.example.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +18,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
+    private final UserService userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,8 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .addFilter(corsFilter) // CrossOrigin(인증x), 시큐리티 필터에 등록 인증(O)
             .formLogin().disable() // form 로그인 사용안함
-            .httpBasic().disable() // http로그인 방식 사용안함
+            .httpBasic().disable() // http 로그인 방식 사용안함
             .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManger
+            .addFilter(new JwtAuthorizationFilter(authenticationManager(), userService))
             .authorizeRequests()
             .antMatchers("/api/user/**")
             .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")

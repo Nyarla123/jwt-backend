@@ -1,8 +1,10 @@
 package com.example.jwt.controller;
 
+import com.example.jwt.config.auth.PrincipalDetails;
 import com.example.jwt.entity.User;
 import com.example.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,7 @@ public class ApiController {
         return "token";
     }
 
-    @PostMapping("join")
+    @PostMapping("/join")
     public String join(@RequestBody User user) {
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -34,6 +36,20 @@ public class ApiController {
         userService.save(user);
 
         return "회원가입완료";
+    }
+
+    // user와 admin접근가능
+    @GetMapping("/user")
+    public String user(Authentication authentication) {
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication : " + principalDetails);
+        return "user";
+    }
+
+    // admin접근가능
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
     }
 
 }

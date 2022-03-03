@@ -1,4 +1,4 @@
-# oracle ??
+# oracle 설정
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
@@ -6,7 +6,7 @@ spring:
     username: DT_PLAYGROUND
     password: dt1234
 
-# mybatis ??
+# mybatis 설정
 mybatis:
   type-aliases-package: com.example.jwt.entity
   mapper-locations: classpath:mappers/**/*.xml

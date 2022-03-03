@@ -1,12 +1,17 @@
 package com.example.jwt.config.auth;
 
 import com.example.jwt.entity.User;
+import lombok.Data;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Data
+@Slf4j
 public class PrincipalDetails implements UserDetails {
 
     private User user;

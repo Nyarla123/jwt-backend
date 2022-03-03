@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class ApiController {
     @GetMapping("/hello")
     public String home() {
 
-        return "home";
+        return "안녕하세요 현재 서버시간은 " + new Date() +"입니다\n";
     }
 
     @PostMapping("/token")

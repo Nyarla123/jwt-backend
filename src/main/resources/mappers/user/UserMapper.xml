@@ -5,6 +5,12 @@
 
 <mapper namespace="com.example.jwt.mapper.UserMapper">
 
+    <select id="findAllUser" resultType="User" >
+        SELECT *
+        FROM TEST_MEMBER
+        ORDER BY USER_ID
+    </select>
+
     <select id="findByUserName" parameterType="string" resultType="User">
         SELECT *
           FROM TEST_MEMBER

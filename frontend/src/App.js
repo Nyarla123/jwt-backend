@@ -6,13 +6,15 @@ import axios from "axios";
 function App() {
 
   const [message, setMessage] = useState("");
+  const [users, setUsers] = useState([]);
+
 
   useEffect(() => {
     axios.get("/api/hello")
         .then((response) => {
           setMessage(response.data)
-        })
-  })
+        });
+  });
 
   return (
     <div className="App">

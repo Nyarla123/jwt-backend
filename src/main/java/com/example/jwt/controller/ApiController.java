@@ -4,6 +4,9 @@ import com.example.jwt.config.auth.PrincipalDetails;
 import com.example.jwt.entity.User;
 import com.example.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 public class ApiController {
 
     private final UserService userService;
@@ -50,8 +54,11 @@ public class ApiController {
 
     // admin접근가능
     @GetMapping("/admin")
-    public String admin() {
-        return "admin";
+    public ResponseEntity<?> admin(@RequestBody User user) {
+
+        log.info("user={}", user);
+
+        return new ResponseEntity<>(userService.findAllUser(user), HttpStatus.OK);
     }
 
 }

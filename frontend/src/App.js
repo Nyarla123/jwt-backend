@@ -1,38 +1,30 @@
 import React,{useState, useEffect} from "react";
-import logo from './logo.svg';
-import './App.css';
 import axios from "axios";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+} from 'react-router-dom';
+import User from "./components/User";
+import Header from "./components/Header";
+
+const config = {
+    headers: {
+        Authorization: "Bearer=" + localStorage.getItem("jwtToken"),
+    },
+};
 
 function App() {
 
-  const [message, setMessage] = useState("");
-  const [users, setUsers] = useState([]);
-
-
-  useEffect(() => {
-    axios.get("/api/hello")
-        .then((response) => {
-          setMessage(response.data)
-        });
-  });
-
+    const [user, setUser] = useState(null);
+    console.log(config);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            {message}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+          <Header />
+          <Route>
+              <User path='/'/>
+          </Route>
+      </Router>
   );
 }
 

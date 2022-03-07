@@ -6,6 +6,7 @@ import com.example.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        // http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class);
         http
             .csrf().disable()
-                // 세선 사용안함
+                // 세션 사용안함
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilter(corsFilter) // CrossOrigin(인증x), 시큐리티 필터에 등록 인증(O)
@@ -40,4 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .access("hasRole('ROLE_ADMIN')")
             .anyRequest().permitAll();
     }
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web
+//            .ignoring()
+//            .antMatchers("/api/login");
+//    }
+
+
 }

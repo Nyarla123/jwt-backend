@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 // security filter를 가지고 있는데 그 중에 BasicAuthenticationFilter이 있음
 // 권한이나 인증이 필요한 특정 주소를 요청했을 떄 위 필터를 무조건 탐

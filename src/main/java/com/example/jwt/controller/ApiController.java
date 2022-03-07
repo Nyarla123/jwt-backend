@@ -1,6 +1,7 @@
 package com.example.jwt.controller;
 
 import com.example.jwt.config.auth.PrincipalDetails;
+import com.example.jwt.config.jwt.JwtAuthenticationFilter;
 import com.example.jwt.entity.LoginDto;
 import com.example.jwt.entity.User;
 import com.example.jwt.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -48,8 +50,11 @@ public class ApiController {
     // user와 admin접근가능
     @GetMapping("/user")
     public String user(Authentication authentication) {
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("authentication : " + principalDetails);
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication : " + principal);
+        System.out.println("principal : "+principal.getUser().getUserId());
+        System.out.println("principal : "+principal.getUser().getUsername());
+        System.out.println("principal : "+principal.getUser().getPassword());
         return "user";
     }
 
@@ -63,9 +68,9 @@ public class ApiController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody User user) {
 
-        
+
 
         return ResponseEntity.ok("dsadsa");
 

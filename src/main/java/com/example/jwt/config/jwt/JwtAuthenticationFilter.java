@@ -83,7 +83,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throws IOException, ServletException {
         System.out.println("successfulAuthentication 실행됨: 인증완료");
         PrincipalDetails principalDetails = (PrincipalDetails)authResult.getPrincipal();
-
+        log.info("principalDetails={}", principalDetails);
         // RSA방식이 아니라 Hash암호방식
         String jwtToken = JWT.create()
                 .withSubject(principalDetails.getUsername())
@@ -91,7 +91,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("userId", principalDetails.getUser().getUserId())
                 .withClaim("username",principalDetails.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtJwtProperties.SECRET));
-
+        log.info("jwtToken={}", jwtToken);
         response.addHeader("Authorization", JwtJwtProperties.TOKEN_PREFIX + jwtToken);
     }
 }

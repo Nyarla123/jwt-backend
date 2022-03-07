@@ -1,6 +1,7 @@
 package com.example.jwt.controller;
 
 import com.example.jwt.config.auth.PrincipalDetails;
+import com.example.jwt.entity.LoginDto;
 import com.example.jwt.entity.User;
 import com.example.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,15 @@ public class ApiController {
         log.info("user={}", user);
 
         return new ResponseEntity<>(userService.findAllUser(user), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+
+        
+
+        return ResponseEntity.ok("dsadsa");
+
     }
 
 }

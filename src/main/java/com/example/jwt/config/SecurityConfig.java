@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 세션 사용안함
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
+            .cors().and()
             .addFilter(corsFilter) // CrossOrigin(인증x), 시큐리티 필터에 등록 인증(O)
             .formLogin().disable() // form 로그인 사용안함
             .httpBasic().disable() // http 로그인 방식 사용안함

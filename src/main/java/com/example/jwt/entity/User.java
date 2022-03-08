@@ -1,5 +1,6 @@
 package com.example.jwt.entity;
 
+
 import lombok.*;
 
 import java.util.ArrayList;

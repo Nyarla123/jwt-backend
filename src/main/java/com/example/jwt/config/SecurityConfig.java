@@ -42,12 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .access("hasRole('ROLE_ADMIN')")
             .anyRequest().permitAll();
     }
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web
-//            .ignoring()
-//            .antMatchers("/api/login");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        web
+            .ignoring()
+            .antMatchers("/api/hello");
+    }
 
 
 }

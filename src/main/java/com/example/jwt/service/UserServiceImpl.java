@@ -4,6 +4,7 @@ import com.example.jwt.entity.User;
 import com.example.jwt.exception.DuplicatedUsernameException;
 import com.example.jwt.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     private final UserMapper userMapper;
@@ -32,4 +34,6 @@ public class UserServiceImpl implements UserService{
 
         userMapper.save(user);
     }
+
+
 }

@@ -65,7 +65,8 @@ public class ApiController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 
-        
+        User user = userService.findByUserName(loginDto.getUsername());
+
 
         return ResponseEntity.ok("dsadsa");
 

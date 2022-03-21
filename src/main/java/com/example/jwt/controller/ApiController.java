@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -55,18 +56,15 @@ public class ApiController {
 
     // admin접근가능
     @GetMapping("/admin")
-    public ResponseEntity<?> admin(@RequestBody User user) {
+    public List<User> admin() {
 
-        log.info("user={}", user);
-
-        return new ResponseEntity<>(userService.findAllUser(user), HttpStatus.OK);
+        return userService.findAllUser();
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 
         User user = userService.findByUserName(loginDto.getUsername());
-
 
         return ResponseEntity.ok("dsadsa");
 

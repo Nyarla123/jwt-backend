@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.jwt.mapper.UserMapper">
 
-    <select id="findAllUser" resultType="User" >
+    <select id="findAllUser" parameterType="User" resultType="User" >
         SELECT *
         FROM TEST_MEMBER
         ORDER BY USER_ID

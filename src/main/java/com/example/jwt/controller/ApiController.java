@@ -29,12 +29,6 @@ public class ApiController {
         return "안녕하세요 현재 서버시간은 " + new Date() +"입니다\n";
     }
 
-    @PostMapping("/token")
-    public String token() {
-
-        return "token";
-    }
-
     @PostMapping("/join")
     public String join(@RequestBody User user) {
 
@@ -59,17 +53,7 @@ public class ApiController {
 
         log.info("user={}", user);
 
-        return new ResponseEntity<>(userService.findAllUser(user), HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-
-        User user = userService.findByUserName(loginDto.getUsername());
-
-
-        return ResponseEntity.ok("dsadsa");
-
+        return new ResponseEntity<>(userService.findByUserName(user.getUsername()), HttpStatus.OK);
     }
 
 }

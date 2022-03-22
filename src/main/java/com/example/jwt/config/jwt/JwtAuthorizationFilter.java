@@ -46,7 +46,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if(jwtHeader == null || !jwtHeader.startsWith(JwtJwtProperties.TOKEN_PREFIX)) {
             chain.doFilter(request,response);
             return;
-        }
+        };
         // JWT 토큰을 검증해서 정상적인 사용자 인지 확인
         String jwtToken = request.getHeader(JwtJwtProperties.HEADER_STRING).replace(JwtJwtProperties.TOKEN_PREFIX,"");
 
@@ -54,7 +54,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 JWT.require(Algorithm.HMAC512(JwtJwtProperties.SECRET)).build().verify(jwtToken)
                         .getClaim("username").asString();
 
-        // 서명이 정상적으로 됨
+        // 서명이 정상
         if(username != null) {
             System.out.println("username 정상");
             User user = userService.findByUserName(username);

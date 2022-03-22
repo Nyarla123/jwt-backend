@@ -45,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web
-            .ignoring()
-            .antMatchers("/api/hello");
+        .ignoring()
+        .antMatchers("/api/hello");
     }
 
 

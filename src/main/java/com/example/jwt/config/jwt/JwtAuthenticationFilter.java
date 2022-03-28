@@ -17,11 +17,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
-
 // 스프링 시큐리티에서 UsernamePasswordAuthenticationFilter 가 있음
 // /login 요청해서 username, password 전송하면
 //  UsernamePasswordAuthenticationFilter 동작함
@@ -38,13 +35,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("JwtAuthenticationFilter:로그인 시도중");
         // 1. username, password 받아서
         try {
-//            BufferedReader br = request.getReader();
-//
-//            String input = null;
-//            while ((input = br.readLine()) != null) {
-//                System.out.println(input);
-//            }
-//            System.out.println(request.getInputStream().toString());
             ObjectMapper om = new ObjectMapper();
             User user = om.readValue(request.getInputStream(), User.class);
             log.info("user={}", user);
@@ -89,11 +79,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // RSA방식이 아니라 Hash암호방식
         String jwtToken = JWT.create()
                 .withSubject(principalDetails.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtJwtProperties.EXPIRATION_TIME)) // 만료 시간
+                .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME)) // 만료 시간
                 .withClaim("userId", principalDetails.getUser().getUserId())
                 .withClaim("username",principalDetails.getUser().getUsername())
-                .sign(Algorithm.HMAC512(JwtJwtProperties.SECRET));
+                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
         log.info("jwtToken={}", jwtToken);
-        response.addHeader("Authorization", JwtJwtProperties.TOKEN_PREFIX + jwtToken);
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+
     }
 }

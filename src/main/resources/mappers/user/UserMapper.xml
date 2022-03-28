@@ -18,8 +18,8 @@
     </select>
 
     <insert id="save" parameterType="User">
-        INSERT INTO TEST_MEMBER(USER_ID, USERNAME, PASSWORD, ROLE)
-        VALUES (TEST_MEMBER_ID_SEQ.nextval, #{username}, #{password}, #{role})
+        INSERT INTO TEST_MEMBER(USER_ID, USERNAME, PASSWORD)
+        VALUES (TEST_MEMBER_ID_SEQ.nextval, #{username}, #{password})
     </insert>
 
 </mapper>
